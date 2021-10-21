@@ -1,0 +1,46 @@
+{
+    "module": {
+        "myip": {
+            "source": "4ops/myip/http",
+            "version": "1.0.0"
+        },
+        "vpc": {
+            "source": "github.com/markokole/iac-aws-modules.git/terraform/vpc",
+            "project_name": "Simple EC2"
+        },
+        "sg": {
+            "source": "github.com/markokole/iac-aws-modules.git/terraform/sg",
+            "vpc_id": "${module.vpc.vpc_id}",
+            "security_group_name": "Test SG module",
+            "security_group_rules": [
+                {
+                    "from_port": 0,
+                    "to_port": 0,
+                    "protocol": -1,
+                    "self": true,
+                    "cidr_blocks": [],
+                    "description": ""
+                },
+                {
+                    "from_port": 80,
+                    "to_port": 80,
+                    "protocol": "tcp",
+                    "self": false,
+                    "cidr_blocks": ["${module.myip.address}/32"],
+                    "description": "Port 80 to local machine"
+                }
+            ]
+        },
+        "ecs": {
+            "source": "github.com/markokole/iac-aws-modules.git/terraform/ecs",
+            "ecs_cluster_name": "${module.vpc.project_name}",
+            "vpc_id": "${module.vpc.vpc_id}",
+            "ecs_configuration": "${local.ecs_configuration}",
+            "security_groups": ["${module.sg.security_group_id}"],
+            "subnet_id_private": "${element(module.vpc.subnet_private, 0)}",
+            "subnet_id_public": "${module.vpc.subnet_public}",
+            "ec2_private_ips": [],
+            "ports_on_ec2": []
+        }
+    }
+}
