@@ -27,3 +27,4 @@ override.tf.json
 
 credentials
 terraform/public-ec2/.terraform.lock.hcl
+terraform/public-ecs-fargate/.terraform.lock.hcl
