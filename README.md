@@ -4,9 +4,9 @@ This repository uses [custom modules](https://github.com/markokole/iac-aws-modul
 
 [JSON syntax is used to provision services in the cloud.](https://www.terraform.io/docs/language/syntax/json.html)
 
-[How to get access to AWS from CLI.](https://github.com/markokole/iac-aws-modules#access-to-aws)
+[How to access to AWS from CLI.](https://github.com/markokole/iac-aws-modules#access-to-aws)
 
-[How to get Terraform environment in Docker ready.](https://github.com/markokole/iac-aws-modules#create-work-environment)
+[Prepare Docker work environment.](https://github.com/markokole/iac-aws-modules#create-work-environment)
 
 Folder *aws* with *credentials* should be ready now, a folder *terraform* is also created. Docker container with name, for example, aws-infra-test, is running after the below comand was executed.
 
@@ -27,8 +27,12 @@ Stepping into the container
 docker exec -it aws-infra-test /bin/sh
 ```
 
-brings you to the work environment.
+brings you to the work environment. Below are some examples of how to use the modules with JSON syntax.
 
-## Provision Infrastructure and EC2 with public IP
+## Provision VPC with EC2 with public IP
 
 [The Terraform JSON Syntax](terraform/public-ec2/provision.tf.json) provisions the VPC, Security Group and an EC2 instance with public IP. The security group opens port 22 to the client IP address just to test the infrastructure by SSH-ing to the server.
+
+## Provision VPC with a Fargate container with public IP
+
+[The Terraform JSON Syntax](terraform/public-ecs-fargate/provision.tf.json) provisions the VPC, Security Group and a Fargate container instance with Nginx server on it. The service is available from the client's IP on port 80.
