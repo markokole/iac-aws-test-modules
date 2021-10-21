@@ -1,6 +1,8 @@
 # Provision AWS infrastructure with JSON Configuration Syntax using custom Terraform modules
 
-[This repository uses JSON syntax to provision services in the cloud.](https://www.terraform.io/docs/language/syntax/json.html)
+This repository uses [custom modules](https://github.com/markokole/iac-aws-modules) for provisioning infrastructure to AWS.
+
+[JSON syntax is used to provision services in the cloud.](https://www.terraform.io/docs/language/syntax/json.html)
 
 [How to get access to AWS from CLI.](https://github.com/markokole/iac-aws-modules#access-to-aws)
 
